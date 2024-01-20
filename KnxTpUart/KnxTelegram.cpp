@@ -354,7 +354,7 @@ void KnxTelegram::set2ByteFloatValue(float value) {
   int exponent = 0;
   for (; v < -2048.0f; v /= 2) exponent++;
   for (; v > 2047.0f; v /= 2) exponent++;
-  long m = round(v) & 0x7FF;
+  long m = (int)round(v) & 0x7FF;
   short msb = (short) (exponent << 3 | m >> 8);
   if (value < 0.0f) msb |= 0x80;
   buffer[8] = msb;

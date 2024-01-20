@@ -526,7 +526,7 @@ int KnxTpUart::serialRead() {
 #endif
 
   while (! (_serialport->available() > 0)) {
-    if (abs(millis() - startTime) > SERIAL_READ_TIMEOUT_MS) {
+    if ((millis() - startTime) > SERIAL_READ_TIMEOUT_MS) {
       // Timeout
 #if defined(TPUART_DEBUG)
       TPUART_DEBUG_PORT.println("Timeout while receiving message");
