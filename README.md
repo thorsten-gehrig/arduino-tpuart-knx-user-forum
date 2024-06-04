@@ -81,13 +81,13 @@ knx.groupWrite2ByteFloat("1/2/3", float);
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-7, 0= no day, 1 = monday ... 7 = sunday], [0-12], [0-59], [0-59])
 
 groupWrite3ByteTime("1/2/3", Weekday, Hour, Minute, Second);
 
 
 
-3 Byte Date (DTP 11)
+3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
 
 groupWrite3ByteDate("1/2/3", Day, Month, Year);
 
@@ -144,13 +144,13 @@ knx.groupAnswer2ByteFloat("1/2/3", float);
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-7, 0= no day, 1 = monday ... 7 = sunday], [0-12], [0-59], [0-59])
 
 knx.groupAnswer3ByteTime("1/2/3", int, int, int, int);
 
 
 
-3 Byte Date (DTP 11)
+3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
 
 knx.groupAnswer3ByteDate("1/2/3", int, int, int);
 
@@ -219,42 +219,42 @@ value = telegram->get2ByteFloatValue();
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-7, 0= no day, 1 = monday ... 7 = sunday])
 
 value = telegram->get3ByteWeekdayValue();
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-12])
 
 value = telegram->get3ByteHourValue();
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-59])
 
 value = telegram->get3ByteMinuteValue();
 
 
 
-3 Byte Time (DTP 10)
+3 Byte Time (DTP 10 - [0-59])
 
 value = telegram->get3ByteSecondValue();
 
 
 
-3 Byte Time (DTP 11)
+3 Byte Time (DTP 11 - [1-31])
 
 value = telegram->get3ByteDayValue();
 
 
-3 Byte Time (DTP 11)
+3 Byte Time (DTP 11 - [1-12])
 
 value = telegram->get3ByteMonthValue();
 
 
 
-3 Byte Time (DTP 11)
+3 Byte Time (DTP 11 - [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
 
 value = telegram->get3ByteYearValue();
 
