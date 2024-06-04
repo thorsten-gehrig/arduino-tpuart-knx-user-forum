@@ -383,13 +383,13 @@ void KnxTelegram::set3ByteTime(int weekday, int hour, int minute, int second) {
   // Move the weekday by 5 bits to the left
   weekday = weekday << 5;
 
-  // Buffer [8] bit 5-7 for weekday, bit 0-4 for hour
+  // Buffer [8] bit 5-7 for weekday [0-7] [0 = no day, 1 = monday ... 7 = sunday], bit 0-4 for hour [0-23]
   buffer[8] = (weekday & B11100000) + (hour & B00011111);
 
-  // Buffer [9] bit 6-7 empty, bit 0-5 for minutes
+  // Buffer [9] bit 6-7 empty, bit 0-5 for minutes [0-59]
   buffer[9] =  minute & B00111111;
 
-  // Buffer [10] bit 6-7 empty, bit 0-5 for seconds
+  // Buffer [10] bit 6-7 empty, bit 0-5 for seconds [0-59]
   buffer[10] = second & B00111111;
 }
 
@@ -428,14 +428,14 @@ int KnxTelegram::get3ByteSecondValue() {
 void KnxTelegram::set3ByteDate(int day, int month, int year) {
   setPayloadLength(5);
 
-  // Buffer [8] bit 5-7 empty, bit 0-4 for month days
+  // Buffer [8] bit 5-7 empty, bit 0-4 for month days [1-31]
   buffer[8] = day & B00011111;
 
-  // Buffer [9] bit 4-7 empty, bit 0-3 for months
+  // Buffer [9] bit 4-7 empty, bit 0-3 for months [1-12]
   buffer[9] =  month & B00001111;
 
-  // Buffer [10] fill with year
-  buffer[10] = year;
+  // Buffer [10] fill with year, bit 0-7 for year [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century]
+  buffer[10] = year & B01111111;
 }
 
 int KnxTelegram::get3ByteDayValue() {
@@ -459,7 +459,7 @@ int KnxTelegram::get3ByteYearValue() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[10]);
+  return (buffer[10] & B01111111);
 }
 
 void KnxTelegram::set4ByteFloatValue(float value) {
