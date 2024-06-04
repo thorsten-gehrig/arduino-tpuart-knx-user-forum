@@ -434,7 +434,7 @@ void KnxTelegram::set3ByteDate(int day, int month, int year) {
   // Buffer [9] bit 4-7 empty, bit 0-3 for months [1-12]
   buffer[9] =  month & B00001111;
 
-  // Buffer [10] fill with year, bit 0-7 for year [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century]
+  // Buffer [10] fill with year, bit 0-7 for year [0-99] [year ≥ 90 interpret as 20th century, year < 90 interpret as 21th century]
   buffer[10] = year & B01111111;
 }
 
