@@ -97,7 +97,7 @@ bool KnxTelegram::isTargetGroup() {
 }
 
 int KnxTelegram::getTargetMainGroup() {
-  return ((buffer[3] & B01111000) >> 3);
+  return ((buffer[3] & B11111000) >> 3);
 }
 
 int KnxTelegram::getTargetMiddleGroup() {
