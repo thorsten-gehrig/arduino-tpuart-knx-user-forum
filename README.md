@@ -4,7 +4,7 @@ Arduino EIB/KNX Interface via TP-UART
 
 This is a very first version of an interface between Arduino and EIB/KNX using the TP-UART interface and Arduino library.
 
-Last modified 06.06.2017
+Last modified 04.06.2024
 
 Hardware
 --------
