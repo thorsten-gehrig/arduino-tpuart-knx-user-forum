@@ -87,7 +87,7 @@ groupWrite3ByteTime("1/2/3", Weekday, Hour, Minute, Second);
 
 
 
-3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
+3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, year < 90 interpret as 21th century])
 
 groupWrite3ByteDate("1/2/3", Day, Month, Year);
 
@@ -150,7 +150,7 @@ knx.groupAnswer3ByteTime("1/2/3", int, int, int, int);
 
 
 
-3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
+3 Byte Date (DTP 11 - [1-31], [1-12], [0-99] [year ≥ 90 interpret as 20th century, year < 90 interpret as 21th century])
 
 knx.groupAnswer3ByteDate("1/2/3", int, int, int);
 
@@ -254,7 +254,7 @@ value = telegram->get3ByteMonthValue();
 
 
 
-3 Byte Time (DTP 11 - [0-99] [year ≥ 90 interpret as 20th century, if year < 90 interpret as 21th century])
+3 Byte Time (DTP 11 - [0-99] [year ≥ 90 interpret as 20th century, year < 90 interpret as 21th century])
 
 value = telegram->get3ByteYearValue();
 
