@@ -16,11 +16,11 @@
 #include "KnxTelegram.h"
 
 // Services from TPUART
-#define TPUART_RESET_INDICATION_BYTE B11
+#define TPUART_RESET_INDICATION_BYTE 0b11
 
 // Services to TPUART
-#define TPUART_DATA_START_CONTINUE B10000000
-#define TPUART_DATA_END B01000000
+#define TPUART_DATA_START_CONTINUE 0b10000000
+#define TPUART_DATA_END 0b01000000
 
 // Uncomment the following line to enable debugging
 //#define TPUART_DEBUG

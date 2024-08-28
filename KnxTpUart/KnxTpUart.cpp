@@ -85,7 +85,7 @@ KnxTpUartSerialEventType KnxTpUart::serialEvent() {
 
 
 bool KnxTpUart::isKNXControlByte(int b) {
-  return ( (b | B00101100) == B10111100 ); // Ignore repeat flag and priority flag
+  return ( (b | 0b00101100) == 0b10111100 ); // Ignore repeat flag and priority flag
 }
 
 void KnxTpUart::checkErrors() {
@@ -103,19 +103,19 @@ void KnxTpUart::checkErrors() {
     TPUART_DEBUG_PORT.println("Parity Error");
   }
 #elif defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) // For UNO
-  if (UCSR0A & B00010000) {
+  if (UCSR0A & 0b00010000) {
     TPUART_DEBUG_PORT.println("Frame Error");
   }
 
-  if (UCSR0A & B00000100) {
+  if (UCSR0A & 0b00000100) {
     TPUART_DEBUG_PORT.println("Parity Error");
   }
 #else
-  if (UCSR1A & B00010000) {
+  if (UCSR1A & 0b00010000) {
     TPUART_DEBUG_PORT.println("Frame Error");
   }
 
-  if (UCSR1A & B00000100) {
+  if (UCSR1A & 0b00000100) {
     TPUART_DEBUG_PORT.println("Parity Error");
   }
 #endif
@@ -203,7 +203,7 @@ KnxTelegram* KnxTpUart::getReceivedTelegram() {
 bool KnxTpUart::groupWriteBool(String Address, bool value) {
   int valueAsInt = 0;
   if (value) {
-    valueAsInt = B00000001;
+    valueAsInt = 0b00000001;
   }
 
   createKNXMessageFrame(2, KNX_COMMAND_WRITE, Address, valueAsInt);
@@ -213,7 +213,7 @@ bool KnxTpUart::groupWriteBool(String Address, bool value) {
 bool KnxTpUart::groupWrite4BitInt(String Address, int value) {
   int out_value = 0;
   if (value) {
-    out_value = value & B00001111;
+    out_value = value & 0b00001111;
   }
 
   createKNXMessageFrame(2, KNX_COMMAND_WRITE, Address, out_value);
@@ -223,7 +223,7 @@ bool KnxTpUart::groupWrite4BitInt(String Address, int value) {
 bool KnxTpUart::groupWrite4BitDim(String Address, bool direction, byte steps) {
   int value = 0;
   if (direction || steps) {
-    value = (direction << 3) + (steps & B00000111);
+    value = (direction << 3) + (steps & 0b00000111);
   }
 
   createKNXMessageFrame(2, KNX_COMMAND_WRITE, Address, value);
@@ -284,7 +284,7 @@ bool KnxTpUart::groupWrite14ByteText(String Address, String value) {
 bool KnxTpUart::groupAnswerBool(String Address, bool value) {
   int valueAsInt = 0;
   if (value) {
-    valueAsInt = B00000001;
+    valueAsInt = 0b00000001;
   }
 
   createKNXMessageFrame(2, KNX_COMMAND_ANSWER, Address, valueAsInt);
@@ -451,10 +451,10 @@ bool KnxTpUart::sendNCDPosConfirm(int sequenceNo, int area, int line, int member
   int confirmation;
   while (true) {
     confirmation = serialRead();
-    if (confirmation == B10001011) {
+    if (confirmation == 0b10001011) {
       return true; // Sent successfully
     }
-    else if (confirmation == B00001011) {
+    else if (confirmation == 0b00001011) {
       return false;
     }
     else if (confirmation == -1) {
@@ -488,11 +488,11 @@ bool KnxTpUart::sendMessage() {
   int confirmation;
   while (true) {
     confirmation = serialRead();
-    if (confirmation == B10001011) {
+    if (confirmation == 0b10001011) {
       delay (SERIAL_WRITE_DELAY_MS);
       return true; // Sent successfully
     }
-    else if (confirmation == B00001011) {
+    else if (confirmation == 0b00001011) {
       delay (SERIAL_WRITE_DELAY_MS);
       return false;
     }
@@ -507,13 +507,13 @@ bool KnxTpUart::sendMessage() {
 }
 
 void KnxTpUart::sendAck() {
-  byte sendByte = B00010001;
+  byte sendByte = 0b00010001;
   _serialport->write(sendByte);
   delay(SERIAL_WRITE_DELAY_MS);
 }
 
 void KnxTpUart::sendNotAddressed() {
-  byte sendByte = B00010000;
+  byte sendByte = 0b00010000;
   _serialport->write(sendByte);
   delay(SERIAL_WRITE_DELAY_MS);
 }
