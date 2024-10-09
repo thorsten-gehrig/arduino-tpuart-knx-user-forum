@@ -54,8 +54,8 @@ void serialEvent1() {
   if (eType == TPUART_RESET_INDICATION) {
     Serial.println("Event TPUART_RESET_INDICATION");
   } 
-  else if (eType == UNKNOWN) {
-    Serial.println("Event UNKNOWN");
+  else if (eType == TPUART_UNKNOWN_EVENT) {
+    Serial.println("Event TPUART_UNKNOWN_EVENT");
   } 
   else if (eType == KNX_TELEGRAM) {
     Serial.println("Event KNX_TELEGRAM");
